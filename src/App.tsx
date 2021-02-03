@@ -1,13 +1,13 @@
-import Logo from './assets/img/logo_mettzer-dark-bg.svg';
+import Logo from './assets/img/logo_mettzer.svg';
 
 function App() {
   return (
-    <div className='App'>
-      <header className='App-header' style={{ backgroundColor: 'grey' }}>
+    <>
+      <header className='App-header'>
         <img src={Logo} alt='logo' />
         <h1>Hello Mettzer</h1>
       </header>
-    </div>
+    </>
   );
 }
 

@@ -1,0 +1,33 @@
+{
+  "colors": {
+    "primary": {
+      "main": "#2db4be",
+      "light": "#6de6f1",
+      "dark": "#00848e"
+    },
+    "secondary": {
+      "main": "#ec4e05",
+      "light": "#ff813c",
+      "dark": "#b21100"
+    },
+    "tertiary": {
+      "main": "#3b3b3b",
+      "light": "#656565",
+      "dark": "#151515"
+    },
+    "mainBg": {
+      "main": "#C7CED4",
+      "light": "#faffff",
+      "dark": "#969da3"
+    },
+    "textOnPrimary": "#3b3b3b",
+    "textOnSecondary": "#FFFFF",
+    "textOnTertiary": "#2db4be",
+
+    "contrastText": "#000000",
+    "wrong": "#c62828",
+    "success": "#00c853"
+  },
+  "borderRadius": "8px",
+  "boxShadow": "0px 0px 15px 3px rgb(0 0 0 / 10%)"
+}
