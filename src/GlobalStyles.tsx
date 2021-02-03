@@ -4,10 +4,11 @@ const GlobalStyles = createGlobalStyle`
   * {
     box-sizing: border-box;
     -webkit-appearance:none;
-  }
-  body {
     margin: 0;
     padding: 0;
+  }
+  body {
+   
     display: flex;
     flex-direction: column;
     font-family: 'Open Sans', sans-serif;

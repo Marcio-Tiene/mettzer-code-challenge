@@ -1,12 +1,9 @@
-import Logo from './assets/img/logo_mettzer.svg';
-import Header from './components/Header';
+import Home from './pages/Home';
 
 function App() {
   return (
     <>
-      <Header />
-      <img src={Logo} alt='logo' />
-      <h1>Hello Mettzer</h1>
+      <Home />
     </>
   );
 }
