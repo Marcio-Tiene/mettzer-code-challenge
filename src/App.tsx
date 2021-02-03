@@ -1,12 +1,12 @@
 import Logo from './assets/img/logo_mettzer.svg';
+import Header from './components/Header';
 
 function App() {
   return (
     <>
-      <header className='App-header'>
-        <img src={Logo} alt='logo' />
-        <h1>Hello Mettzer</h1>
-      </header>
+      <Header />
+      <img src={Logo} alt='logo' />
+      <h1>Hello Mettzer</h1>
     </>
   );
 }

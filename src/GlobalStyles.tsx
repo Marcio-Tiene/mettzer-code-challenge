@@ -22,8 +22,7 @@ const GlobalStyles = createGlobalStyle`
     
     display:flex;
     flex-direction:column;
-    align-items:center;
-    justify-content:center;
+    
     background-color: ${({ theme }) => theme.colors.mainBg.main};
     color: ${({ theme }) => theme.colors.contrastText};
   }
