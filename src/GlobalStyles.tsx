@@ -22,15 +22,22 @@ const GlobalStyles = createGlobalStyle`
     
   }
   
+  #modal-root {
+    z-index:1000;
+    position:absolute;
+  }
+   
 
+  
+  
   #root {
     flex:1;
     
     display:flex;
-    flex-direction:column;
+    flex-direction:column;   
     
-    background-color: ${({ theme }) => theme.colors.mainBg.main};
     color: ${({ theme }) => theme.colors.contrastText};
+    background-color: ${({ theme }) => theme.colors.mainBg.main};
   }
   `;
 

@@ -20,6 +20,8 @@
       "light": "#faffff",
       "dark": "#969da3"
     },
+    "modalBg": "#2db4be",
+
     "textOnPrimary": "#3b3b3b",
     "textOnSecondary": "#FFFFF",
     "textOnTertiary": "#2db4be",
@@ -28,6 +30,7 @@
     "wrong": "#c62828",
     "success": "#00c853"
   },
+
   "borderRadius": "8px",
   "boxShadow": "0px 0px 15px 3px rgb(0 0 0 / 10%)"
 }
