@@ -3,8 +3,6 @@ import BreadCrumbTag from '../../components/BreadCrumb/BreadCrumbTag';
 import PageDefault from '../../components/PageDefault';
 import { FaFilePdf } from 'react-icons/fa';
 
-import Form from '../../components/Form';
-
 const Home: React.FC = () => {
   return (
     <>
@@ -23,9 +21,7 @@ const Home: React.FC = () => {
             alignItems: 'center',
             justifyContent: 'center',
           }}
-        >
-          <Form />
-        </section>
+        ></section>
       </PageDefault>
     </>
   );

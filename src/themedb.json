@@ -20,12 +20,10 @@
       "light": "#faffff",
       "dark": "#969da3"
     },
-    "modalBg": "#2db4be",
-
+    "translucidBg": "#2db4be61",
     "textOnPrimary": "#3b3b3b",
     "textOnSecondary": "#FFFFF",
     "textOnTertiary": "#2db4be",
-
     "contrastText": "#000000",
     "wrong": "#c62828",
     "success": "#00c853"

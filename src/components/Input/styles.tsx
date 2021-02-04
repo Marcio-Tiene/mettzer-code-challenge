@@ -13,31 +13,59 @@ export const FormField = styled.fieldset`
   display: flex;
   flex-direction: column;
   border: none;
-  input {
-    color: #000;
+  .error {
+    color: ${({ theme }) => theme.colors.wrong};
+    font-size: 0.7rem;
+    align-self: flex-end;
+    margin-right: 1ch;
+  }
+  label {
+    color: ${({ theme }) => theme.colors.textOnPrimary};
+    font-weight: 600;
     text-indent: 1ch;
-    border-radius: 2px;
+    ${(p: IInput) =>
+      p.inputError &&
+      css`
+        color: ${({ theme }) => theme.colors.wrong};
+      `}
+  }
+
+  input {
+    color: ${({ theme }) => theme.colors.textOnPrimary};
+    text-indent: 1ch;
+    border-radius: 13px;
     font-size: 1rem;
-    line-height: 1.5rem;
-    border: 1px solid ${({ theme }) => theme.colors.tertiary.main};
+    line-height: 1.7rem;
+    border: none;
     width: 100%;
     transition: linear 0.2s;
     overflow: hidden;
+    box-shadow: inset 6px 6px 3px #a8a8a8, inset -6px -6px 3px #ffffff;
+
     &:focus {
       outline: none;
-      -webkit-box-shadow: 0 0 0 1px #008000;
-      -moz-box-shadow: 0 0 0 1px #008000;
-      box-shadow: 0 0 0 1px #008000;
-      background-color: transparent;
+      -webkit-box-shadow: inset 6px 6px 3px #a8a8a8, inset -6px -6px 3px #ffffff,
+        0 0 0 2px ${({ theme }) => theme.colors.primary.main};
+      -moz-box-shadow: inset 6px 6px 3px #a8a8a8, inset -6px -6px 3px #ffffff,
+        0 0 0 2px ${({ theme }) => theme.colors.primary.main};
+      box-shadow: inset 6px 6px 3px #a8a8a8, inset -6px -6px 3px #ffffff,
+        0 0 0 2px ${({ theme }) => theme.colors.primary.main};
+
+      background-color: #fff;
     }
     ${(p: IInput) =>
       p.inputError &&
       css`
-        -webkit-box-shadow: inset 4px 4px 4px #ff0000, 0 0 0 1px #ff0000;
-        -moz-box-shadow: inset 4px 4px 4px #ff0000, 0 0 0 1px #ff0000;
-        box-shadow: inset 4px 4px 4px #ff0000, 0 0 0 1px #ff0000;
-        background-color: rgba(255, 0, 0, 0.185);
-        overflow: hidden;
+        outline: none;
+        -webkit-box-shadow: inset 6px 6px 3px #a8a8a8,
+          inset -6px -6px 3px #ffffff,
+          0 0 0 2px ${({ theme }) => theme.colors.wrong};
+        -moz-box-shadow: inset 6px 6px 3px #a8a8a8, inset -6px -6px 3px #ffffff,
+          0 0 0 2px ${({ theme }) => theme.colors.wrong};
+        box-shadow: inset 6px 6px 3px #a8a8a8, inset -6px -6px 3px #ffffff,
+          0 0 0 2px ${({ theme }) => theme.colors.wrong};
+
+        background-color: #fff;
       `}
   }
 `;

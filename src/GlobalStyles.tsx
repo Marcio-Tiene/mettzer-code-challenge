@@ -22,15 +22,13 @@ const GlobalStyles = createGlobalStyle`
     
   }
   
-  #modal-root {
-    z-index:1000;
-    position:absolute;
-  }
+  
    
 
   
   
   #root {
+    position: relative;
     flex:1;
     
     display:flex;
