@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../Footer';
 import Header from '../Header';
 import ToolNavBar from '../ToolNavBar';
 interface IPageDefault {
@@ -11,6 +12,7 @@ const PageDefault: React.FC<IPageDefault> = ({ breadCrumbs, children }) => {
       <Header />
       <ToolNavBar>{breadCrumbs}</ToolNavBar>
       {children}
+      <Footer />
     </>
   );
 };
