@@ -7,6 +7,7 @@ interface IButton {
   label: string;
   Icon?: IconType;
   iconSize?: number;
+  className?: string;
 }
 const Button: React.FC<IButton> = ({
   label,
@@ -14,6 +15,7 @@ const Button: React.FC<IButton> = ({
   onClick,
   Icon,
   iconSize,
+  className,
 }) => {
   const gap = 0.7;
   const minLoadingWidth = !!iconSize
@@ -24,7 +26,7 @@ const Button: React.FC<IButton> = ({
     <>
       <BaseButton
         style={{ gap: `${gap}ch` }}
-        className='search-button'
+        className={className}
         minWidth={`calc(2rem + ${minLoadingWidth}ch)`}
         disabled={isLoadindig}
         onClick={onClick}

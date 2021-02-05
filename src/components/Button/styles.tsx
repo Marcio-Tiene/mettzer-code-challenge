@@ -49,9 +49,13 @@ export const BaseButton = styled.button`
     background-color: ${(p) => p.theme.colors.secondary.dark};
   }
 
-  &.search-button {
+  &.form-search-button {
     margin-top: 20px;
     align-self: flex-end;
+  }
+
+  &.nav-button {
+    justify-self: right;
   }
 `;
 

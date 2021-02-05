@@ -18,9 +18,12 @@ const NavBar: INavBar = styled.nav`
 `;
 
 NavBar.BreadCrumbs = styled.div`
+  flex: auto;
+
   display: flex;
   align-items: center;
   width: fit-content;
+
   color: ${({ theme }) => theme.colors.textOnPrimary};
 `;
 

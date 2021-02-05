@@ -56,14 +56,15 @@ const SearchForm: React.FC = () => {
       setIsLoading(true);
       hasQuery(data);
       console.log(data);
-      clearInputError();
 
+      clearInputError();
       setIsLoading(false);
       handleFormClose();
     } catch (err) {
       if (err.message === 'NO_DATA') {
-        formRef.current && formRef.current?.setErrors(noQueryError);
+        console.log(formRef.current);
         insertInputError();
+        formRef.current?.setErrors(noQueryError);
         setIsLoading(false);
       }
     }
@@ -95,6 +96,7 @@ const SearchForm: React.FC = () => {
           onFocus={clearInputError}
         />
         <Button
+          className='form-search-button'
           Icon={GiArchiveResearch}
           iconSize={2}
           isLoadindig={isLoading}
