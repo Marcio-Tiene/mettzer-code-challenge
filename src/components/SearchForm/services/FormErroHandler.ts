@@ -1,4 +1,17 @@
 import { IFormData } from '../index';
+const noQueryError = {
+  message: 'NO_QUERY',
+  error: {
+    authors: 'Precisamos de pelo menos um campo preenchido',
+    title: 'Precisamos de pelo menos um campo preenchido',
+    description: 'Precisamos de pelo menos um campo preenchido',
+  },
+};
+export const hasNoInputerros = {
+  authors: false,
+  title: false,
+  description: false,
+};
 
 export const hasQuery = (data: IFormData) => {
   const noData: IFormData = {
@@ -12,12 +25,6 @@ export const hasQuery = (data: IFormData) => {
     data.title === noData.title &&
     data.description === noData.description
   ) {
-    throw new Error('NO_DATA');
+    throw noQueryError;
   }
-};
-
-export const noQueryError = {
-  authors: 'Precisamos de pelo menos um campo preenchido',
-  title: 'Precisamos de pelo menos um campo preenchido',
-  description: 'Precisamos de pelo menos um campo preenchido',
 };

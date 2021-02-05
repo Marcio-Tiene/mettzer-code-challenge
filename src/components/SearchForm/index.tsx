@@ -5,7 +5,7 @@ import TextArea from '../TextArea';
 import FormContainer, { CloseIcon, FormTitle } from './styles';
 import ModalBackground from '../ModalBackground';
 import Button from '../Button';
-import { hasQuery, noQueryError } from './services/FormErroHandler';
+import { hasNoInputerros, hasQuery } from './services/FormErroHandler';
 import { GiArchiveResearch } from 'react-icons/gi';
 import { AiOutlineFileSearch } from 'react-icons/ai';
 import FormOpenHook from '../../hooks/FormOpenHook';
@@ -16,55 +16,57 @@ export interface IFormData {
   description: string;
 }
 const SearchForm: React.FC = () => {
-  const hasNoInputerros = { authors: false, title: false, description: false };
   const [hasInputError, setHasInputError] = useState(hasNoInputerros);
   const [isLoading, setIsLoading] = useState(false);
 
   const { setIsFormOpen, isFormOpen } = FormOpenHook();
 
-  const insertInputError = () => {
-    const insertUniqueError = (inputName: string): void => {
-      setHasInputError((prevState) => {
-        return { ...prevState, [inputName]: true };
-      });
-      formRef.current?.setFieldError(inputName, '');
-    };
-    for (const field in noQueryError) {
-      insertUniqueError(field);
-    }
+  const insertInputError = (inputName: string): void => {
+    setHasInputError((prevState) => {
+      return { ...prevState, [inputName]: true };
+    });
+    formRef.current?.setFieldError(inputName, '');
   };
-  const clearInputError = () => {
-    const clearUniqueError = (inputName: string): void => {
-      setHasInputError((prevState) => {
-        return { ...prevState, [inputName]: false };
-      });
-      formRef.current?.setFieldError(inputName, '');
-    };
-    for (const field in noQueryError) {
-      clearUniqueError(field);
+
+  const clearInputError = (inputName: string): void => {
+    setHasInputError((prevState) => {
+      return { ...prevState, [inputName]: false };
+    });
+    formRef.current?.setFieldError(inputName, '');
+  };
+
+  const clearInputErrorOnFocus = (
+    event: React.FocusEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => clearInputError(event.target.id);
+
+  const clearAllInputError = () => {
+    for (const field in hasInputError) {
+      clearInputError(field);
     }
   };
 
   const handleFormClose = () => {
+    setIsLoading(false);
     setIsFormOpen(false);
-    clearInputError();
+    clearAllInputError();
+    for (const field in hasInputError) formRef.current.setFieldValue(field, '');
   };
 
   const formRef = useRef<FormHandles>(null);
-  const handleSubmit: SubmitHandler<IFormData> = (data) => {
+  const handleSubmit: SubmitHandler<IFormData> = (data, { reset }) => {
     try {
       setIsLoading(true);
       hasQuery(data);
       console.log(data);
 
-      clearInputError();
-      setIsLoading(false);
+      reset();
       handleFormClose();
     } catch (err) {
-      if (err.message === 'NO_DATA') {
-        console.log(formRef.current);
-        insertInputError();
-        formRef.current?.setErrors(noQueryError);
+      if (err.message === 'NO_QUERY') {
+        for (const error in err.error) {
+          insertInputError(error);
+        }
+        formRef.current?.setErrors(err.error);
         setIsLoading(false);
       }
     }
@@ -81,19 +83,19 @@ const SearchForm: React.FC = () => {
           label='Author:'
           name='authors'
           hasError={hasInputError.authors}
-          onFocus={clearInputError}
+          onFocus={clearInputErrorOnFocus}
         />
         <Input
           label='Titulo:'
           name='title'
           hasError={hasInputError.title}
-          onFocus={clearInputError}
+          onFocus={clearInputErrorOnFocus}
         />
         <TextArea
           label='Descrição:'
           name='description'
           hasError={hasInputError.description}
-          onFocus={clearInputError}
+          onFocus={clearInputErrorOnFocus}
         />
         <Button
           className='form-search-button'
