@@ -14,6 +14,12 @@ export const FormFieldTextArea = styled.fieldset`
   display: flex;
   flex-direction: column;
   border: none;
+  .error {
+    color: ${({ theme }) => theme.colors.wrong};
+    font-size: 0.7rem;
+    align-self: flex-end;
+    margin-right: 1ch;
+  }
 
   label {
     color: ${({ theme }) => theme.colors.textOnPrimary};

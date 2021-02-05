@@ -1,6 +1,5 @@
 import { Form as UnForm } from '@unform/web';
 import styled from 'styled-components';
-import Button from '../Button';
 
 const FormContainer = styled(UnForm)`
   display: flex;
