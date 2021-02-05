@@ -9,6 +9,7 @@ import { hasNoInputerros, hasQuery } from './services/FormErroHandler';
 import { GiArchiveResearch } from 'react-icons/gi';
 import { AiOutlineFileSearch } from 'react-icons/ai';
 import FormOpenHook from '../../hooks/FormOpenHook';
+import { researchGet } from './services/ApiHandler';
 
 export interface IFormData {
   authors: string;
@@ -53,11 +54,12 @@ const SearchForm: React.FC = () => {
   };
 
   const formRef = useRef<FormHandles>(null);
-  const handleSubmit: SubmitHandler<IFormData> = (data, { reset }) => {
+  const handleSubmit: SubmitHandler<IFormData> = async (data, { reset }) => {
     try {
       setIsLoading(true);
       hasQuery(data);
-      console.log(data);
+
+      console.log(await researchGet(data));
 
       reset();
       handleFormClose();
@@ -69,6 +71,8 @@ const SearchForm: React.FC = () => {
         formRef.current?.setErrors(err.error);
         setIsLoading(false);
       }
+
+      setIsLoading(false);
     }
   };
   return (

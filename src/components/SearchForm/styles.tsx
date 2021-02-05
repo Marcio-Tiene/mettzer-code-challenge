@@ -47,6 +47,8 @@ export const FormTitle = styled.h1`
   box-shadow: ${(p) => p.theme.boxShadow};
 `;
 
+export const PreH1 = styled.pre``;
+
 export const CloseIcon = styled(AiOutlineCloseCircle)`
   position: absolute;
   top: 0.4rem;
