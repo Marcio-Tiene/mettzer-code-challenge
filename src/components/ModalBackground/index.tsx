@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-
+interface IModalBackground {
+  show: boolean;
+}
 const ModalBackground = styled.dialog`
   position: absolute;
 
-  display: flex;
+  display: ${(p: IModalBackground) => (p.show ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
   justify-content: center;

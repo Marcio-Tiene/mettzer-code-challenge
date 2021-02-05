@@ -1,6 +1,16 @@
 import { Form as UnForm } from '@unform/web';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+
+const scale = keyframes`
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
+  }
+`;
 
 const FormContainer = styled(UnForm)`
   position: relative;
@@ -20,6 +30,8 @@ const FormContainer = styled(UnForm)`
   box-shadow: ${({ theme }) => theme.boxShadow};
 
   border-radius: 13px;
+
+  animation: ${scale} 0.2s linear;
 `;
 
 export const FormTitle = styled.h1`

@@ -5,14 +5,17 @@ import GlobalStyles from './GlobalStyles';
 import reportWebVitals from './reportWebVitals';
 import themedb from './themedb.json';
 import { ThemeProvider } from 'styled-components';
+import { FormOpenContextProvider } from './contexts/FormOpenContext';
 
 const theme = themedb;
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
-      <GlobalStyles />
+      <FormOpenContextProvider>
+        <App />
+        <GlobalStyles />
+      </FormOpenContextProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

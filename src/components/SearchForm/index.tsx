@@ -8,6 +8,7 @@ import Button from '../Button';
 import { hasQuery, noQueryError } from './services/FormErroHandler';
 import { GiArchiveResearch } from 'react-icons/gi';
 import { AiOutlineFileSearch } from 'react-icons/ai';
+import FormOpenHook from '../../hooks/FormOpenHook';
 
 export interface IFormData {
   authors: string;
@@ -18,6 +19,8 @@ const SearchForm: React.FC = () => {
   const hasNoInputerros = { authors: false, title: false, description: false };
   const [hasInputError, setHasInputError] = useState(hasNoInputerros);
   const [isLoading, setIsLoading] = useState(false);
+
+  const { setIsFormOpen, isFormOpen } = FormOpenHook();
 
   const insertInputError = () => {
     const insertUniqueError = (inputName: string): void => {
@@ -42,6 +45,11 @@ const SearchForm: React.FC = () => {
     }
   };
 
+  const handleFormClose = () => {
+    setIsFormOpen(false);
+    clearInputError();
+  };
+
   const formRef = useRef<FormHandles>(null);
   const handleSubmit: SubmitHandler<IFormData> = (data) => {
     try {
@@ -49,7 +57,9 @@ const SearchForm: React.FC = () => {
       hasQuery(data);
       console.log(data);
       clearInputError();
+
       setIsLoading(false);
+      handleFormClose();
     } catch (err) {
       if (err.message === 'NO_DATA') {
         formRef.current && formRef.current?.setErrors(noQueryError);
@@ -59,7 +69,7 @@ const SearchForm: React.FC = () => {
     }
   };
   return (
-    <ModalBackground open={true}>
+    <ModalBackground show={isFormOpen} open={isFormOpen}>
       <FormContainer onSubmit={handleSubmit} autoComplete='off' ref={formRef}>
         <FormTitle>
           <AiOutlineFileSearch size={25} /> Pesquise material científico no CORE
@@ -90,7 +100,7 @@ const SearchForm: React.FC = () => {
           isLoadindig={isLoading}
           label='Buscar'
         />
-        <CloseIcon size={20} />
+        <CloseIcon size={20} onClickCapture={handleFormClose} />
       </FormContainer>
     </ModalBackground>
   );
