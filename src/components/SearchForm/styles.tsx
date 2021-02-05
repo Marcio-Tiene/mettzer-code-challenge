@@ -53,6 +53,7 @@ export const CloseIcon = styled(AiOutlineCloseCircle)`
   right: 0.4rem;
   color: ${(p) => p.theme.colors.tertiary.main};
   cursor: pointer;
+  transition: linear 0.2s;
 
   :hover {
     color: ${(p) => p.theme.colors.tertiary.light};
