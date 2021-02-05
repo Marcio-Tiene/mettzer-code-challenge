@@ -16,7 +16,7 @@ export const hasQuery = (data: IFormData) => {
   }
 };
 
-export const noQuerError = {
+export const noQueryError = {
   authors: 'Precisamos de pelo menos um campo preenchido',
   title: 'Precisamos de pelo menos um campo preenchido',
   description: 'Precisamos de pelo menos um campo preenchido',

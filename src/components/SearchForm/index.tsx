@@ -5,7 +5,7 @@ import TextArea from '../TextArea';
 import FormContainer from './styles';
 import ModalBackground from '../ModalBackground';
 import Button from '../Button';
-import { hasQuery, noQuerError } from './services/FormErroHandler';
+import { hasQuery, noQueryError } from './services/FormErroHandler';
 
 export interface IFormData {
   authors: string;
@@ -17,14 +17,27 @@ const SearchForm: React.FC = () => {
   const [hasInputError, setHasInputError] = useState(hasNoInputerros);
   const [isLoading, setIsLoading] = useState(false);
 
-  const insertInputError = (inputName: string): void => {
-    setHasInputError((prevState) => {
-      return { ...prevState, [inputName]: true };
-    });
+  const insertInputError = () => {
+    const insertUniqueError = (inputName: string): void => {
+      setHasInputError((prevState) => {
+        return { ...prevState, [inputName]: true };
+      });
+      formRef.current?.setFieldError(inputName, '');
+    };
+    for (const field in noQueryError) {
+      insertUniqueError(field);
+    }
   };
-  const clearInputError = (inputName: string): void => {
-    setHasInputError({ ...hasInputError, [inputName]: false });
-    formRef.current?.setFieldError(inputName, '');
+  const clearInputError = () => {
+    const clearUniqueError = (inputName: string): void => {
+      setHasInputError((prevState) => {
+        return { ...prevState, [inputName]: false };
+      });
+      formRef.current?.setFieldError(inputName, '');
+    };
+    for (const field in noQueryError) {
+      clearUniqueError(field);
+    }
   };
 
   const formRef = useRef<FormHandles>(null);
@@ -33,12 +46,12 @@ const SearchForm: React.FC = () => {
       setIsLoading(true);
       hasQuery(data);
       console.log(data);
+      clearInputError();
+      setIsLoading(false);
     } catch (err) {
       if (err.message === 'NO_DATA') {
-        formRef.current && formRef.current?.setErrors(noQuerError);
-        for (const error in noQuerError) {
-          insertInputError(error);
-        }
+        formRef.current && formRef.current?.setErrors(noQueryError);
+        insertInputError();
         setIsLoading(false);
       }
     }
@@ -50,19 +63,19 @@ const SearchForm: React.FC = () => {
           label='Author:'
           name='authors'
           hasError={hasInputError.authors}
-          onFocus={() => clearInputError('authors')}
+          onFocus={clearInputError}
         />
         <Input
           label='Titulo:'
           name='title'
           hasError={hasInputError.title}
-          onFocus={() => clearInputError('title')}
+          onFocus={clearInputError}
         />
         <TextArea
           label='Descrição:'
           name='description'
           hasError={hasInputError.description}
-          onFocus={() => clearInputError('description')}
+          onFocus={clearInputError}
         />
         <Button isLoadindig={isLoading} label='Testando' />
       </FormContainer>
