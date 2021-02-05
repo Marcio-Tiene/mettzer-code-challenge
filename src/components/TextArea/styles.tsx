@@ -9,6 +9,7 @@ export const FormFieldTextArea = styled.fieldset`
   padding-left: 3px;
   padding-right: 3px;
   height: 112px;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
