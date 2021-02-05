@@ -30,22 +30,23 @@ export const BaseButton = styled.button`
 
   padding: 0.5rem 1rem;
   border-radius: 3rem;
-  background-color: ${(p) => p.theme.colors.primary.main};
-  color: ${(p) => p.theme.colors.textOnPrimary};
+  background-color: ${(p) => p.theme.colors.secondary.main};
+  color: #ffffff;
+  /* color: ${(p) => p.theme.colors.textOnSecondary}; */
   font-weight: 600;
   -webkit-box-shadow: ${(p) => p.theme.boxShadow};
   -moz-box-shadow: ${(p) => p.theme.boxShadow};
   box-shadow: ${(p) => p.theme.boxShadow};
   transition: linear 0.2s;
-
+  cursor: pointer;
   :hover {
-    background-color: ${(p) => p.theme.colors.primary.dark};
+    background-color: ${(p) => p.theme.colors.secondary.dark};
   }
   :active {
-    background-color: ${(p) => p.theme.colors.primary.main};
+    background-color: ${(p) => p.theme.colors.secondary.main};
   }
   :disabled {
-    background-color: ${(p) => p.theme.colors.primary.dark};
+    background-color: ${(p) => p.theme.colors.secondary.dark};
   }
 
   &.search-button {
@@ -55,7 +56,7 @@ export const BaseButton = styled.button`
 `;
 
 export const LoadingSpiner = styled(VscLoading)`
-  color: ${(p) => p.theme.colors.tertiary.dark};
+  color: #ffffff;
   width: 1rem;
   height: 1rem;
 

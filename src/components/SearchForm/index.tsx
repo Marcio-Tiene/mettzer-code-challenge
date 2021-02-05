@@ -2,10 +2,12 @@ import React, { useRef, useState } from 'react';
 import { SubmitHandler, FormHandles } from '@unform/core';
 import Input from '../Input';
 import TextArea from '../TextArea';
-import FormContainer from './styles';
+import FormContainer, { CloseIcon, FormTitle } from './styles';
 import ModalBackground from '../ModalBackground';
 import Button from '../Button';
 import { hasQuery, noQueryError } from './services/FormErroHandler';
+import { GiArchiveResearch } from 'react-icons/gi';
+import { AiOutlineFileSearch } from 'react-icons/ai';
 
 export interface IFormData {
   authors: string;
@@ -59,6 +61,11 @@ const SearchForm: React.FC = () => {
   return (
     <ModalBackground open={true}>
       <FormContainer onSubmit={handleSubmit} autoComplete='off' ref={formRef}>
+        <FormTitle>
+          <AiOutlineFileSearch size={25} /> Pesquise material científico no CORE
+          buscando por pelo menos um dos campos abaixo.
+        </FormTitle>
+
         <Input
           label='Author:'
           name='authors'
@@ -77,7 +84,13 @@ const SearchForm: React.FC = () => {
           hasError={hasInputError.description}
           onFocus={clearInputError}
         />
-        <Button isLoadindig={isLoading} label='Testando' />
+        <Button
+          Icon={GiArchiveResearch}
+          iconSize={2}
+          isLoadindig={isLoading}
+          label='Buscar'
+        />
+        <CloseIcon size={20} />
       </FormContainer>
     </ModalBackground>
   );
