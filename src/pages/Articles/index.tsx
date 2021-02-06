@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PageDefault from '../../components/PageDefault';
 import { useHistory, useLocation } from 'react-router-dom';
 import BreadCrumb from '../../components/BreadCrumb';
-import { capitalize } from '../../services/utils';
+import { capitalize, capitalizeAllWords } from '../../services/utils';
 import { IFormData } from '../../interfaces/IFormData';
 import { researchGet } from '../../services/coreApi';
 import { GiConsoleController } from 'react-icons/gi';
@@ -52,18 +52,19 @@ const Articles: React.FC = () => {
 
         const filteredResponse: IData[] = response.data.map((data) => {
           return {
-            id: data._source.id,
-            authors: data._source.authors,
-            type: data._type,
-            description: data._source.description,
-            title: data._source.title,
-            urls: data._source.urls,
+            id: data.id,
+            authors: data.authors,
+            type: data.type,
+            description: data.description,
+            title: data.title,
+            urls: data.dowloadUrl,
           };
         });
 
         setData(filteredResponse);
       } catch (err) {
         console.log(err);
+        history.push('/');
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -75,7 +76,7 @@ const Articles: React.FC = () => {
       breadCrumbs={
         <BreadCrumb
           tool='Core'
-          authors={capitalize(queryObject.authors)}
+          authors={capitalizeAllWords(queryObject.authors)}
           title={capitalize(queryObject.title)}
           description={capitalize(queryObject.description)}
           page={page}
@@ -98,6 +99,7 @@ const Articles: React.FC = () => {
               {data.map((data) => (
                 <li key={data.id}>
                   <h4>{decodeURI(data.title)}</h4> {data.type}{' '}
+                  {data.authors.join(', ')}{' '}
                 </li>
               ))}
             </ul>
