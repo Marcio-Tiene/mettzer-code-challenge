@@ -7,7 +7,7 @@ interface IBreadCrumb {
   authors?: string;
   title?: string;
   description?: string;
-  page?: number;
+  page: number;
   tool: string;
 }
 

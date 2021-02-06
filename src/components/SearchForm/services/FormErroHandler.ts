@@ -1,4 +1,5 @@
-import { IFormData } from '../index';
+import { IFormData } from '../../../interfaces/IFormData';
+
 const noQueryError = {
   message: 'NO_QUERY',
   error: {

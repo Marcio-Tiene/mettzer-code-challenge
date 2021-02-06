@@ -1,4 +1,8 @@
-import coreApi from '../../sercices/coreApi';
+import axios from 'axios';
+
+const coreApi = axios.create({
+  baseURL: 'https://core.ac.uk:443/api-v2/search',
+});
 
 interface IQueryObject {
   authors?: string;
@@ -18,12 +22,12 @@ const ApiQueryConstructor = (data: IQueryObject) => {
   return apiSearchUri;
 };
 
-export const researchGet = async (data: IQueryObject) => {
+export const researchGet = async (data: IQueryObject, page: number = 1) => {
   try {
     const researchQuery = ApiQueryConstructor(data);
     const response = (
       await coreApi.get(
-        `/${researchQuery}?apiKey=${process.env.REACT_APP_CORE_API_KEY}`
+        `/${researchQuery}?page=${page}&apiKey=${process.env.REACT_APP_CORE_API_KEY}`
       )
     ).data;
     return response;
@@ -31,3 +35,5 @@ export const researchGet = async (data: IQueryObject) => {
     throw err;
   }
 };
+
+export default coreApi;

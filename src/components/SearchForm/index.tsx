@@ -9,14 +9,13 @@ import { hasNoInputerros, hasQuery } from './services/FormErroHandler';
 import { GiArchiveResearch } from 'react-icons/gi';
 import { AiOutlineFileSearch } from 'react-icons/ai';
 import FormOpenHook from '../../hooks/FormOpenHook';
-import { researchGet } from './services/ApiHandler';
+import { IFormData } from '../../interfaces/IFormData';
+import { useHistory } from 'react-router';
+import targetPageUrl from '../../services/appRouterHandler';
+import { researchGet } from '../../services/coreApi';
 
-export interface IFormData {
-  authors: string;
-  title: string;
-  description: string;
-}
 const SearchForm: React.FC = () => {
+  const history = useHistory();
   const [hasInputError, setHasInputError] = useState(hasNoInputerros);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -60,6 +59,8 @@ const SearchForm: React.FC = () => {
       hasQuery(data);
 
       console.log(await researchGet(data));
+
+      history.push(targetPageUrl(data));
 
       reset();
       handleFormClose();
