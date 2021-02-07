@@ -7,6 +7,27 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
 
+    scrollbar-width: thin;
+
+  scrollbar-color: ${(p) => p.theme.colors.primary.main} transparent;
+  overflow-y: auto;
+  overflow-x: hidden;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${(p) => p.theme.colors.primary.main};
+    border-radius: 5px;
+  }
+
+
 
     @media (max-width:900px) {
     scrollbar-width: none;

@@ -8,8 +8,8 @@ function App() {
     <>
       <BrowserRouter>
         <Switch>
-          <Route path='/' component={Home} exact strict />
-          <Route path='/core-search' component={CoreResultPage} exact />
+          <Route path='/' component={Home} exact />
+          <Route path='/core-search' component={CoreResultPage} />
           <Route component={Error404} />
         </Switch>
       </BrowserRouter>

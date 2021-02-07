@@ -3,23 +3,42 @@ import PageDefault from '../../components/PageDefault';
 import { useHistory, useLocation } from 'react-router-dom';
 import BreadCrumb from '../../components/BreadCrumb';
 import { capitalize, capitalizeAllWords } from '../../services/utils';
-import { IFormData } from '../../interfaces/IFormData';
+import { IData, IFormData } from '../../interfaces/IFormData';
 import { researchGet } from '../../services/coreApi';
 import PageLoadingSpiner from '../../components/PageLoadingSpinner';
-
-interface IData {
-  id: string;
-  authors: string[];
-  type: string;
-  description: string;
-  title: string;
-  urls: string[];
-}
+import Button from '../../components/Button';
+import { AiTwotoneStar } from 'react-icons/ai';
+import ArticleCard from '../../components/ArticleCard';
 
 const articlePerPage = 10;
 
-const pageCounter = (totlaHits: number) =>
-  Math.ceil(totlaHits / articlePerPage);
+const pageCounter = (totlaHits: number) => {
+  const maxPages = Math.ceil(totlaHits / articlePerPage);
+
+  const totalpages = maxPages < 100 ? maxPages : 100;
+
+  return totalpages;
+};
+
+const initialPages = {
+  firstPage: 1,
+  previewsPage: 0,
+  previewPreviewPage: 0,
+  actualPage: 0,
+  nextPage: 0,
+  nextNextpage: 0,
+  lastPage: 0,
+};
+
+const pagesNumberContructor = (page: number, totalHits: number) => ({
+  firstPage: 1,
+  previewsPage: page - 2,
+  previewPreviewPage: page - 1,
+  actualPage: page,
+  nextPage: page + 1,
+  nextNextpage: page + 2,
+  lastPage: pageCounter(totalHits),
+});
 
 const CoreResultPage: React.FC = () => {
   const windowRef = window.location.href;
@@ -29,7 +48,7 @@ const CoreResultPage: React.FC = () => {
   };
 
   const [data, setData] = useState(null as IData[]);
-  const [totalPages, setTotalPages] = useState(0);
+  const [pages, setPages] = useState(initialPages);
 
   const query = useQuery();
 
@@ -48,7 +67,7 @@ const CoreResultPage: React.FC = () => {
       try {
         const response: any = await researchGet(queryObject, page);
 
-        setTotalPages(pageCounter(response.totalHits));
+        setPages(pagesNumberContructor(page, response.totalHits));
 
         const filteredResponse: IData[] = response.data.map((data) => {
           return {
@@ -89,27 +108,35 @@ const CoreResultPage: React.FC = () => {
           justifyContent: 'center',
         }}
       >
-        {!!data ? (
+        {data !== null ? (
           <>
-            {totalPages === 1 ? (
-              <h1> 1 Página</h1>
-            ) : (
-              <h1>{totalPages} Páginas</h1>
-            )}
-            <ul>
-              {data.map((data) => (
-                <li key={data.id}>
-                  <h4>{decodeURI(data.title)}</h4> {data.type}{' '}
-                  {data.authors.join(', ')}{' '}
-                  {data.urls.map((url) => (
-                    <a href={url} key={url + data.id}>
-                      {' '}
-                      {url}
-                    </a>
-                  ))}
-                </li>
-              ))}
-            </ul>
+            {data.map((data) => (
+              <ArticleCard key={data.id} Icon={AiTwotoneStar} data={data} />
+            ))}
+
+            <div style={{ display: 'flex', gap: '5px' }}>
+              {pages.previewPreviewPage > 0 && (
+                <Button label={`${pages.firstPage}`} />
+              )}
+              {pages.previewPreviewPage > 0 && (
+                <Button label={`${pages.previewPreviewPage}`} />
+              )}
+              {pages.previewsPage > 0 && (
+                <Button label={`${pages.previewsPage}`} />
+              )}
+
+              <Button label={`${pages.actualPage}`} />
+
+              {pages.nextPage < pages.lastPage && (
+                <Button label={`${pages.nextPage}`} />
+              )}
+              {pages.nextNextpage < pages.lastPage && (
+                <Button label={`${pages.nextNextpage}`} />
+              )}
+              {pages.nextNextpage < pages.lastPage && (
+                <Button label={`${pages.lastPage}`} />
+              )}
+            </div>
           </>
         ) : (
           <PageLoadingSpiner />
