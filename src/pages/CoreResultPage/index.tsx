@@ -111,7 +111,7 @@ const CoreResultPage: React.FC = () => {
         {data !== null ? (
           <>
             {data.map((data) => (
-              <ArticleCard key={data.id} Icon={AiTwotoneStar} data={data} />
+              <ArticleCard key={data.id} data={data} />
             ))}
 
             <div style={{ display: 'flex', gap: '5px' }}>
