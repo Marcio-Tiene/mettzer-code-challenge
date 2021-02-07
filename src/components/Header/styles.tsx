@@ -18,16 +18,34 @@ const HeaderContainer: IHeaderContainer = styled.header`
 HeaderContainer.Logo = styled.img`
   height: 30px;
   width: 150px;
+  cursor: pointer;
 `;
 
-export const BackToHomeLink = styled(GiEntryDoor)`
+export const BackToHomeLink = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: ${(p) => p.theme.colors.textOnTertiary};
+  font-size: 0.7rem;
+  transition: linear 0.2s;
+  margin-right: 20px;
+  cursor: pointer;
+
+  :hover {
+    color: ${(p) => p.theme.colors.primary.light};
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
+export const BackToHomeLinkIcon = styled(GiEntryDoor)`
   color: ${(p) => p.theme.colors.primary.main};
   transition: linear 0.2s;
   height: 30px;
   width: 30px;
 
-  margin-right: 20px;
-  cursor: pointer;
   :hover {
     color: ${(p) => p.theme.colors.primary.light};
   }

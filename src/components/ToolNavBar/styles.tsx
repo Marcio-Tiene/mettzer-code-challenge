@@ -17,6 +17,12 @@ const NavBar: INavBar = styled.nav`
   flex-wrap: wrap;
 
   background-color: ${({ theme }) => theme.colors.primary.main};
+
+  &.error-404 {
+    button {
+      display: none;
+    }
+  }
 `;
 
 NavBar.BreadCrumbs = styled.div`
@@ -27,6 +33,10 @@ NavBar.BreadCrumbs = styled.div`
   width: fit-content;
 
   color: ${({ theme }) => theme.colors.textOnPrimary};
+
+  &.error-404 {
+    flex: inherit;
+  }
 `;
 
 export default NavBar;

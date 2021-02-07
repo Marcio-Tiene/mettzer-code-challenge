@@ -54,8 +54,16 @@ export const BaseButton = styled.button`
     align-self: flex-end;
   }
 
-  &.nav-button {
-    justify-self: right;
+  &.secondary-action-filled {
+    background-color: ${(p) => p.theme.colors.tertiary.main};
+    color: ${(p) => p.theme.colors.textOnTertiary};
+
+    :hover {
+      background-color: ${(p) => p.theme.colors.tertiary.light};
+    }
+    :active {
+      background-color: ${(p) => p.theme.colors.tertiary.main};
+    }
   }
 `;
 
