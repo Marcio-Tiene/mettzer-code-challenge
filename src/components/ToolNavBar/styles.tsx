@@ -6,12 +6,14 @@ interface INavBar extends StyledComponentBase<'nav', any, {}> {
 
 const NavBar: INavBar = styled.nav`
   width: 100vw;
-  height: 50px;
+  height: fit-content;
 
-  padding: 0 20px;
+  padding: 10px 20px;
+  gap: 10px;
 
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
 
   background-color: ${({ theme }) => theme.colors.primary.main};

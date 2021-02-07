@@ -1,6 +1,7 @@
 import Home from './pages/Home';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Articles from './pages/Articles';
+import CoreResultPage from './pages/CoreResultPage';
+import Error404 from './pages/Error404';
 
 function App() {
   return (
@@ -8,7 +9,9 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path='/' component={Home} exact />
-          <Route path='/articles' component={Articles} exact />
+          <Route path='/core-search' component={CoreResultPage} exact />
+          <Route path='/error' component={Error404} exact />
+          <Route component={Error404} />
         </Switch>
       </BrowserRouter>
     </>

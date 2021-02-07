@@ -6,6 +6,15 @@ const GlobalStyles = createGlobalStyle`
     -webkit-appearance:none;
     margin: 0;
     padding: 0;
+
+
+    @media (max-width:900px) {
+    scrollbar-width: none;
+    ::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  }
   }
   body {
    

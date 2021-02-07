@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { SubmitHandler, FormHandles } from '@unform/core';
 import Input from '../Input';
-import TextArea from '../TextArea';
 import FormContainer, { CloseIcon, FormTitle } from './styles';
 import ModalBackground from '../ModalBackground';
 import Button from '../Button';
@@ -12,7 +11,6 @@ import FormOpenHook from '../../hooks/FormOpenHook';
 import { IFormData } from '../../interfaces/IFormData';
 import { useHistory } from 'react-router';
 import targetPageUrl from '../../services/appRouterHandler';
-import { researchGet } from '../../services/coreApi';
 
 const SearchForm: React.FC = () => {
   const history = useHistory();
@@ -35,9 +33,8 @@ const SearchForm: React.FC = () => {
     formRef.current?.setFieldError(inputName, '');
   };
 
-  const clearInputErrorOnFocus = (
-    event: React.FocusEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => clearInputError(event.target.id);
+  const clearInputErrorOnFocus = (event: React.FocusEvent<HTMLInputElement>) =>
+    clearInputError(event.target.id);
 
   const clearAllInputError = () => {
     for (const field in hasInputError) {
@@ -57,8 +54,6 @@ const SearchForm: React.FC = () => {
     try {
       setIsLoading(true);
       hasQuery(data);
-
-      console.log(await researchGet(data));
 
       history.push(targetPageUrl(data));
 
@@ -97,12 +92,7 @@ const SearchForm: React.FC = () => {
           hasError={hasInputError.title}
           onFocus={clearInputErrorOnFocus}
         />
-        <TextArea
-          label='Descrição:'
-          name='description'
-          hasError={hasInputError.description}
-          onFocus={clearInputErrorOnFocus}
-        />
+
         <Button
           className='form-search-button'
           Icon={GiArchiveResearch}

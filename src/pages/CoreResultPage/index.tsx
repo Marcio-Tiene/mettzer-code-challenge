@@ -5,7 +5,6 @@ import BreadCrumb from '../../components/BreadCrumb';
 import { capitalize, capitalizeAllWords } from '../../services/utils';
 import { IFormData } from '../../interfaces/IFormData';
 import { researchGet } from '../../services/coreApi';
-import { GiConsoleController } from 'react-icons/gi';
 import PageLoadingSpiner from '../../components/PageLoadingSpinner';
 
 interface IData {
@@ -22,7 +21,7 @@ const articlePerPage = 10;
 const pageCounter = (totlaHits: number) =>
   Math.ceil(totlaHits / articlePerPage);
 
-const Articles: React.FC = () => {
+const CoreResultPage: React.FC = () => {
   const windowRef = window.location.href;
   const history = useHistory();
   const useQuery = () => {
@@ -37,7 +36,6 @@ const Articles: React.FC = () => {
   const queryObject: IFormData = {
     authors: query.get('authors') || '',
     title: query.get('title') || '',
-    description: query.get('description') || '',
   };
 
   const page = Number(query.get('page')) || 1;
@@ -52,25 +50,24 @@ const Articles: React.FC = () => {
 
         const filteredResponse: IData[] = response.data.map((data) => {
           return {
-            id: data.id,
-            authors: data.authors,
-            type: data.type,
-            description: data.description,
-            title: data.title,
-            urls: data.dowloadUrl,
+            id: data._id,
+            authors: data._source.authors,
+            type: data._type,
+            description: data._source.description,
+            title: data._source.title,
+            urls: data._source.urls,
           };
         });
 
         setData(filteredResponse);
       } catch (err) {
         console.log(err);
-        history.push('/');
+        history.push('/error');
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [windowRef]);
 
-  console.log(data);
   return (
     <PageDefault
       breadCrumbs={
@@ -78,7 +75,6 @@ const Articles: React.FC = () => {
           tool='Core'
           authors={capitalizeAllWords(queryObject.authors)}
           title={capitalize(queryObject.title)}
-          description={capitalize(queryObject.description)}
           page={page}
         />
       }
@@ -94,12 +90,22 @@ const Articles: React.FC = () => {
       >
         {!!data ? (
           <>
-            <h1>{totalPages} Páginas</h1>
+            {totalPages === 1 ? (
+              <h1> 1 Página</h1>
+            ) : (
+              <h1>{totalPages} Páginas</h1>
+            )}
             <ul>
               {data.map((data) => (
                 <li key={data.id}>
                   <h4>{decodeURI(data.title)}</h4> {data.type}{' '}
                   {data.authors.join(', ')}{' '}
+                  {data.urls.map((url) => (
+                    <a href={url} key={url + data.id}>
+                      {' '}
+                      {url}
+                    </a>
+                  ))}
                 </li>
               ))}
             </ul>
@@ -112,4 +118,4 @@ const Articles: React.FC = () => {
   );
 };
 
-export default Articles;
+export default CoreResultPage;
