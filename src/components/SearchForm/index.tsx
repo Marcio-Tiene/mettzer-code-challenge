@@ -80,7 +80,7 @@ const SearchForm: React.FC = () => {
         </FormTitle>
 
         <Input
-          placeholder='Autor 1, Autor 2,...., Autor x (verifique a acentuação)'
+          placeholder='Autor 1 / Autor 2 / .... / Autor x (verifique a acentuação)'
           label='Author:'
           name='authors'
           hasError={hasInputError.authors}

@@ -17,8 +17,8 @@ const exactSearchQuery = (queryValue: string, key: string) => {
   const splitedQuery =
     key === 'authors'
       ? queryValue
-          .split(',')
-          .map((query) => `"${query}"`)
+          .split('/')
+          .map((query) => `"${query.trim()}"`)
           .join(queryAndJoiner)
       : `"${queryValue}"`;
 

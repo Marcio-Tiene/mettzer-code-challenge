@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const HomeSection = styled.section`
@@ -32,4 +33,15 @@ export const HomeCoreDisclaimer = styled.div`
 export const HomeCoreDisclaimerTitle = styled.h1`
   display: flex;
   align-items: center;
+`;
+
+export const CoreLink = styled(Link)`
+  color: ${(p) => p.theme.colors.primary.main};
+  font-weight: 600;
+  :hover {
+    color: ${(p) => p.theme.colors.primary.dark};
+  }
+  :visited {
+    color: ${(p) => p.theme.colors.tertiary.main};
+  }
 `;
