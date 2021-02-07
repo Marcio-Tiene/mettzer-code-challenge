@@ -8,10 +8,11 @@ const Error404: React.FC = () => {
   return (
     <>
       <Header />
-      <ToolNavBar>
+      <ToolNavBar className='error-404'>
         <BreadCrumbTag>
           <MdMoodBad />
-          Error 404: Bad Request
+          Error 404: Bad Request. Ops, a página não foi encontranda, continue a
+          navegação indo para a home page
         </BreadCrumbTag>
       </ToolNavBar>
     </>

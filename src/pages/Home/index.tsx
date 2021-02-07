@@ -2,6 +2,12 @@ import React from 'react';
 import BreadCrumbTag from '../../components/BreadCrumb/BreadCrumbTag';
 import PageDefault from '../../components/PageDefault';
 import { FaFilePdf } from 'react-icons/fa';
+import {
+  HomeCoreDisclaimer,
+  HomeCoreDisclaimerTitle,
+  HomeSection,
+} from './styles';
+import CoreLogo from '../../assets/img/CoreLogo';
 
 const Home: React.FC = () => {
   return (
@@ -10,18 +16,23 @@ const Home: React.FC = () => {
         breadCrumbs={
           <BreadCrumbTag>
             <FaFilePdf size={18} />
-            Buscar material científico no CORE
+            Pesquise no CORE.
           </BreadCrumbTag>
         }
       >
-        <section
-          style={{
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        ></section>
+        <HomeSection>
+          <HomeCoreDisclaimer>
+            <HomeCoreDisclaimerTitle>
+              <CoreLogo />
+              CORE
+            </HomeCoreDisclaimerTitle>
+            <p>
+              CORE é maior coleção do mundo de artigos públicos de pesquisa.
+            </p>
+
+            <p>Faça uma pesquisa e surpreenda-se!</p>
+          </HomeCoreDisclaimer>
+        </HomeSection>
       </PageDefault>
     </>
   );
