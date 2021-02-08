@@ -12,11 +12,8 @@ import {
 } from '../../components/PageTurners';
 import SearchContent from '../../components/SearchContent';
 
-const CoreResultPage: React.FC = () => {
-  const favoritos: IData[] =
-    JSON.parse(localStorage.getItem('favoritos')) || ([] as IData[]);
+const Favorites: React.FC = () => {
   const windowRef = window.location.href;
-
   const history = useHistory();
   const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -24,7 +21,6 @@ const CoreResultPage: React.FC = () => {
 
   const [data, setData] = useState(null as IData[]);
   const [pages, setPages] = useState(initialPages);
-  const [isFavored, setIsFavored] = useState(false);
 
   const query = useQuery();
 
@@ -68,20 +64,16 @@ const CoreResultPage: React.FC = () => {
     <PageDefault
       breadCrumbs={
         <BreadCrumb
-          tool='Core'
+          tool='Favoritos'
           authors={capitalizeAllWords(queryObject.authors)}
           title={capitalize(queryObject.title)}
           page={page}
         />
       }
     >
-      <SearchContent
-        starOnClick={(data) => console.log(data)}
-        data={data}
-        pages={pages}
-      />
+      <SearchContent data={data} pages={pages} />
     </PageDefault>
   );
 };
 
-export default CoreResultPage;
+export default Favorites;
