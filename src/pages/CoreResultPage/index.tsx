@@ -20,7 +20,7 @@ const CoreResultPage: React.FC = () => {
     return new URLSearchParams(useLocation().search);
   };
 
-  const [data, setData] = useState(null as IData[]);
+  const [data, setData] = useState([{ title: '', id: '' }] as IData[]);
   const [pages, setPages] = useState(initialPages);
 
   const query = useQuery();

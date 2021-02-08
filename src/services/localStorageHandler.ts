@@ -1,6 +1,7 @@
 import { IData } from '../interfaces/IFormData';
 
-export const favorite: IData[] = JSON.parse(localStorage.getItem('favorites'));
+export const favorite: IData[] =
+  JSON.parse(localStorage.getItem('favorites')) || [];
 
 export const postFavorite = (data: IData) => {
   const initialState = favorite;
