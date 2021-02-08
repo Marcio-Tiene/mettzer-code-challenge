@@ -1,46 +1,74 @@
-# Getting Started with Create React App
+# Mettzer Code Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projeto desenvolvido para o desfio técnico da [Mettzer](https://www.mettzer.com/).
 
-## Available Scripts
+![Mettzer code Challenge index](/ReadMeImg/index.png)
+![Mettzer code Challenge form](/ReadMeImg/form.png)
+![Mettzer code Challenge search results](/ReadMeImg/search-results.png)
 
-In the project directory, you can run:
+## Especificações do desafio
 
-### `yarn start`
+Implementar uma aplicação frontend utilizando React, que oferece uma interface web com as seguintes funcionalidades:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Deve ser possível buscar por artigos científicos na API do portal [CORE](https://core.ac.uk).
+   Exibir na listagem:
+   - authors
+   - type
+   - title
+   - description
+   - urls (clicáveis)
+2. Deve ser possível marcar/desmarcar os resultados da pesquisa como favorito.
+3. Deve ter uma listagem com os artigos favoritados e ela deve estar disponível mesmo que a janela do navegador seja fechada e aberta novamente.
+4. As listagens, tanto da pesquisa quanto dos favoritos, devem ter paginação
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Implementar testes automatizados para os componentes criados.
+Utilizar React-Router com rotas específicas para cada operação.
 
-### `yarn test`
+O método de armazenamento das informações fica a critério do candidato, podendo ser um back-end as a service, um back-end de implementação própria ou mesmo utilizando o localStorage.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Você pode conferir o resultado em [mettzer-code-challenge.vercel.app](https://mettzer-code-challenge.vercel.app/)
 
-### `yarn build`
+## Técnologias utilizadas
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [ReactJS:](https://reactjs.org/) Para criar interfaces resposivas e reativas
+- [Create React App:](https://github.com/facebook/create-react-app) Para facilitar o setup de bundlers e loaders.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [Typescript:](https://www.typescriptlang.org/): Para aumentar a produtividade e evitar possíveis erros durante o desenvolvimento.
+- [React-icons:](https://react-icons.github.io/react-icons/) Para uma facil iconografia.
+- [Axios:](https://github.com/axios/axios) Para as requisições http.
+- [react-router-dom:](https://reactrouter.com/) Para lidar com as rotas da aplicação.
+- [Styled-components:](https://styled-components.com/) Para uma estilização mais dinâmica.
+- [LocalStorage:](https://developer.mozilla.org/pt-BR/docs/Web/API/Window/Window.localStorage) Como um banco de dados fake.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Setup do projeto
 
-### `yarn eject`
+Para rodar o projeto você deve ter instalado o Node v15.3.0 ou mais atual.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Clone esse repositório do github.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. crie um arquivo .env.local e seguindo o exemplo do arquivo .env.local.example coloque sua api key do core.
+   - Link para solicitar a [apiKey](https://core.ac.uk/services/api/)
+   - Link para a [documentação](https://core.ac.uk/docs/#!/all/search)
+3. Rode o comando:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+yarn
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+ou
 
-## Learn More
+```bash
+npm i
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Agora é só acessar o [http://localhost:3000/]() e começar a codar.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Você pode acessar rotas usando query params
+
+- author
+- title
+- page
+
+Como nesse exemplo [https://mettzer-code-challenge.vercel.app/core-search?authors=marcio&title=beer&page=1](https://mettzer-code-challenge.vercel.app/core-search?authors=marcio&title=beer&page=1)
+
+###Aproveite.
