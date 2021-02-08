@@ -5,12 +5,12 @@ import BreadCrumb from '../../components/BreadCrumb';
 import { capitalize, capitalizeAllWords } from '../../services/utils';
 import { IData, IFormData } from '../../interfaces/IFormData';
 import { researchGet } from '../../services/coreApi';
-import PageLoadingSpiner from '../../components/PageLoadingSpinner';
-import ArticleCard from '../../components/ArticleCard';
-import PageTurners, {
+
+import {
   initialPages,
   pagesNumberContructor,
 } from '../../components/PageTurners';
+import SearchContent from '../../components/SearchContent';
 
 const CoreResultPage: React.FC = () => {
   const windowRef = window.location.href;
@@ -71,28 +71,7 @@ const CoreResultPage: React.FC = () => {
         />
       }
     >
-      <section
-        style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {data !== null ? (
-          <>
-            <PageTurners pages={pages} />
-            {data.map((data) => (
-              <ArticleCard key={data.id} data={data} />
-            ))}
-
-            <PageTurners pages={pages} />
-          </>
-        ) : (
-          <PageLoadingSpiner />
-        )}
-      </section>
+      <SearchContent data={data} pages={pages} />
     </PageDefault>
   );
 };

@@ -7,7 +7,7 @@ import {
   PageTurnerContent,
 } from './styles';
 
-interface IPageTurner {
+export interface IPageTurner {
   previewsPreviewsPage: number;
   previewsPage: number;
   actualPage: number;
