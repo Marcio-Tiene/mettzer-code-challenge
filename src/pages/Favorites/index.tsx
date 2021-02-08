@@ -13,8 +13,8 @@ const Favorites: React.FC = () => {
   const { id } = useParams<Record<string, string | undefined>>();
   const page = Number(id);
   const initialSlice = page * 10 - 10;
-  const finalSlice = initialSlice + 9;
-  const data = favorite.slice(initialSlice, finalSlice) || dataInitialState;
+
+  const data = favorite.splice(initialSlice, 10) || dataInitialState;
 
   if (data[0].id === dataInitialState[0].id || data.length === 0)
     history.push('/error');
