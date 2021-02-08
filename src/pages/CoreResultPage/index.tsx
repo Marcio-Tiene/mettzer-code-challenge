@@ -20,7 +20,9 @@ const CoreResultPage: React.FC = () => {
     return new URLSearchParams(useLocation().search);
   };
 
-  const [data, setData] = useState([{ title: '', id: '' }] as IData[]);
+  const [data, setData] = useState([
+    { title: '', id: '', authors: [''], urls: [''], description: '', type: '' },
+  ] as IData[]);
   const [pages, setPages] = useState(initialPages);
 
   const query = useQuery();
@@ -42,22 +44,16 @@ const CoreResultPage: React.FC = () => {
 
         setPages(pagesNumberContructor(page, response.totalHits));
 
-        const filteredResponse: IData[] = response.data.map(
-          (data: {
-            _id: any;
-            _source: { authors: any; description: any; title: any; urls: any };
-            _type: any;
-          }) => {
-            return {
-              id: data._id,
-              authors: data._source.authors,
-              type: data._type,
-              description: data._source.description,
-              title: data._source.title,
-              urls: data._source.urls,
-            };
-          }
-        );
+        const filteredResponse: IData[] = response.data.map((data) => {
+          return {
+            id: data._id,
+            authors: data._source.authors,
+            type: data._type,
+            description: data._source.description,
+            title: data._source.title,
+            urls: data._source.urls,
+          };
+        });
 
         setData(filteredResponse);
       } catch (err) {
