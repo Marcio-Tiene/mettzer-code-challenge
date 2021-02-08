@@ -34,8 +34,6 @@ const CoreResultPage: React.FC = () => {
 
   const page = Number(query.get('page')) || 1;
 
-  const errorPath = '/error' + useLocation().pathname + useLocation().search;
-
   useEffect(() => {
     (async () => {
       setData(null);
@@ -57,7 +55,7 @@ const CoreResultPage: React.FC = () => {
 
         setData(filteredResponse);
       } catch (err) {
-        history.push(errorPath);
+        history.push('/error');
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
