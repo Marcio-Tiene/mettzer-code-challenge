@@ -1,3 +1,5 @@
+import { IData } from '../interfaces/IFormData';
+
 export const capitalizeAllWords = (string: string) => {
   const spaceSpliter = string ? string.split(' ') : [];
 
@@ -12,3 +14,7 @@ export const capitalizeAllWords = (string: string) => {
 
 export const capitalize = (sentence: string) =>
   sentence ? sentence[0].toUpperCase() + sentence.slice(1) : '';
+
+export const dataInitialState = [
+  { title: '', id: '', authors: [''], urls: [''], description: '', type: '' },
+] as IData[];

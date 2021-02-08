@@ -15,7 +15,7 @@ const Favorites: React.FC = () => {
   const finalSlice = initialSlice + 9;
   const data = favorite.slice(initialSlice, finalSlice) || [];
 
-  if (data.length === 0) history.push('/error/favoritos');
+  if (data.length === 0) history.push('/error');
 
   const totalHits = favorite.length;
   console.log(id);

@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PageDefault from '../../components/PageDefault';
 import { useHistory, useLocation } from 'react-router-dom';
 import BreadCrumb from '../../components/BreadCrumb';
-import { capitalize, capitalizeAllWords } from '../../services/utils';
+import {
+  capitalize,
+  capitalizeAllWords,
+  dataInitialState,
+} from '../../services/utils';
 import { IData, IFormData } from '../../interfaces/IFormData';
 import { researchGet } from '../../services/coreApi';
 
@@ -20,7 +24,7 @@ const CoreResultPage: React.FC = () => {
     return new URLSearchParams(useLocation().search);
   };
 
-  const [data, setData] = useState([{ title: '', id: '' }] as IData[]);
+  const [data, setData] = useState(dataInitialState);
   const [pages, setPages] = useState(initialPages);
 
   const query = useQuery();
@@ -31,8 +35,6 @@ const CoreResultPage: React.FC = () => {
   };
 
   const page = Number(query.get('page')) || 1;
-
-  const errorPath = '/error' + useLocation().pathname + useLocation().search;
 
   useEffect(() => {
     (async () => {
@@ -55,7 +57,7 @@ const CoreResultPage: React.FC = () => {
 
         setData(filteredResponse);
       } catch (err) {
-        history.push(errorPath);
+        history.push('/error');
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
