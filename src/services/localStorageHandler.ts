@@ -23,7 +23,7 @@ export const postFavorite = (data: IData) => {
 export const deleteFavorite = (id: string) => {
   if (!!localStorage.getItem('favorites')) {
     const newData = JSON.parse(localStorage.getItem('favorites')).filter(
-      (data) => data.id !== id
+      (data: IData) => data.id !== id
     );
     localStorage.removeItem('favorites');
 
