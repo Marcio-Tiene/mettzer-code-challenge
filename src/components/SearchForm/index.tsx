@@ -11,6 +11,7 @@ import FormOpenHook from '../../hooks/FormOpenHook';
 import { IFormData } from '../../interfaces/IFormData';
 import { useHistory } from 'react-router';
 import targetPageUrl from '../../services/appRouterHandler';
+import { researchGet } from '../../services/coreApi';
 
 const SearchForm: React.FC = () => {
   const history = useHistory();
@@ -55,7 +56,11 @@ const SearchForm: React.FC = () => {
       setIsLoading(true);
       hasQuery(data);
 
-      history.push(targetPageUrl(data));
+      const hasResults = await researchGet(data);
+
+      if (hasResults.totalHits === 0) throw new Error('not found');
+
+      history.push(`/${targetPageUrl(data)}`);
 
       reset();
       handleFormClose();
@@ -66,9 +71,13 @@ const SearchForm: React.FC = () => {
         }
         formRef.current?.setErrors(err.error);
         setIsLoading(false);
+      } else {
+        formRef.current?.setErrors({
+          authors: 'Não foi encontrado resultado para sua pesquisa',
+          title: 'Não foi encontrado resultado para sua pesquisa',
+        });
+        setIsLoading(false);
       }
-
-      setIsLoading(false);
     }
   };
   return (

@@ -1,77 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PageDefault from '../../components/PageDefault';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import BreadCrumb from '../../components/BreadCrumb';
-import { capitalize, capitalizeAllWords } from '../../services/utils';
-import { IData, IFormData } from '../../interfaces/IFormData';
-import { researchGet } from '../../services/coreApi';
 
-import {
-  initialPages,
-  pagesNumberContructor,
-} from '../../components/PageTurners';
+import { pagesNumberContructor } from '../../components/PageTurners';
 import SearchContent from '../../components/SearchContent';
+import { favorite } from '../../services/localStorageHandler';
 
 const Favorites: React.FC = () => {
-  const windowRef = window.location.href;
   const history = useHistory();
-  const useQuery = () => {
-    return new URLSearchParams(useLocation().search);
-  };
+  const { id } = useParams<Record<string, string | undefined>>();
+  const page = Number(id);
+  const initialSlice = page * 10 - 11;
+  const finalSlice = initialSlice + 9;
+  const data = favorite.slice(initialSlice, finalSlice) || [];
 
-  const [data, setData] = useState(null as IData[]);
-  const [pages, setPages] = useState(initialPages);
+  if (data.length === 0) history.push('/error/favoritos');
 
-  const query = useQuery();
+  const totalHits = favorite.length;
+  console.log(id);
 
-  const queryObject: IFormData = {
-    authors: query.get('authors') || '',
-    title: query.get('title') || '',
-  };
-
-  const page = Number(query.get('page')) || 1;
-
-  const errorPath = '/error' + useLocation().pathname + useLocation().search;
-
-  useEffect(() => {
-    (async () => {
-      setData(null);
-      try {
-        const response: any = await researchGet(queryObject, page);
-
-        setPages(pagesNumberContructor(page, response.totalHits));
-
-        const filteredResponse: IData[] = response.data.map((data) => {
-          return {
-            id: data._id,
-            authors: data._source.authors,
-            type: data._type,
-            description: data._source.description,
-            title: data._source.title,
-            urls: data._source.urls,
-          };
-        });
-
-        setData(filteredResponse);
-      } catch (err) {
-        history.push(errorPath);
-      }
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [windowRef]);
+  const pages = pagesNumberContructor(page, totalHits);
 
   return (
-    <PageDefault
-      breadCrumbs={
-        <BreadCrumb
-          tool='Favoritos'
-          authors={capitalizeAllWords(queryObject.authors)}
-          title={capitalize(queryObject.title)}
-          page={page}
-        />
-      }
-    >
-      <SearchContent data={data} pages={pages} />
+    <PageDefault breadCrumbs={<BreadCrumb tool='Favoritos' page={page} />}>
+      <SearchContent isFavoritePage={true} data={data} pages={pages} />
     </PageDefault>
   );
 };

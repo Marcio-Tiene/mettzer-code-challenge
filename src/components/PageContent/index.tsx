@@ -8,7 +8,7 @@ interface ISearchContent {
   data: IData[];
   pages: IPageTurner;
   starOnClick?: (data: IData) => void;
-  isFavoritePage: boolean;
+  isFavoritePage?: boolean;
 }
 
 const SearchContent: React.FC<ISearchContent> = ({

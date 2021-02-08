@@ -32,6 +32,8 @@ const ArticleCard: React.FC<IArticleCard> = ({
   const starClickHandler = () => {
     setStarChecked((prevState) => !prevState);
     if (isfavoritesPage) {
+      isStarChecked ? deleteFavorite(data.id) : postFavorite(data);
+      window.location.reload();
     }
     if (!isfavoritesPage) {
       isStarChecked ? deleteFavorite(data.id) : postFavorite(data);

@@ -11,7 +11,7 @@ function App() {
         <Switch>
           <Route path='/' component={Home} exact />
           <Route path='/core-search' component={CoreResultPage} />
-          <Route path='/favoritos' component={Favorites} />
+          <Route path='/favorites/:id' component={Favorites} exact />
           <Route component={Error404} />
         </Switch>
       </BrowserRouter>

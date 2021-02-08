@@ -73,6 +73,7 @@ const CoreResultPage: React.FC = () => {
       }
     >
       <SearchContent
+        isFavoritePage={false}
         starOnClick={(data) => console.log(data)}
         data={data}
         pages={pages}
