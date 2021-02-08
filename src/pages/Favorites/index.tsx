@@ -6,7 +6,6 @@ import BreadCrumb from '../../components/BreadCrumb';
 import { pagesNumberContructor } from '../../components/PageTurners';
 import SearchContent from '../../components/SearchContent';
 import { favorite } from '../../services/localStorageHandler';
-import { dataInitialState } from '../../services/utils';
 
 const Favorites: React.FC = () => {
   const history = useHistory();
