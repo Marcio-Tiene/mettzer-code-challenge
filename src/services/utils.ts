@@ -1,15 +1,19 @@
 import { IData } from '../interfaces/IFormData';
 
 export const capitalizeAllWords = (string: string) => {
-  const spaceSpliter = string ? string.split(' ') : [];
+  if (!!string) {
+    const spaceSpliter = string ? string.split(' ') : ['a', 'b'];
 
-  const wordToFirstLetterUppercase = spaceSpliter.map(
-    (word) => word[0].toUpperCase() + word.slice(1)
-  );
+    const wordToFirstLetterUppercase = spaceSpliter.map(
+      (word) => word[0].toUpperCase() + word.slice(1)
+    );
 
-  const sentenceCapitalized = wordToFirstLetterUppercase.join(' ');
+    const sentenceCapitalized = wordToFirstLetterUppercase.join(' ');
 
-  return sentenceCapitalized;
+    return sentenceCapitalized;
+  } else {
+    return '';
+  }
 };
 
 export const capitalize = (sentence: string) =>

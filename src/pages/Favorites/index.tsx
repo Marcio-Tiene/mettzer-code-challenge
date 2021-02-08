@@ -13,13 +13,15 @@ const Favorites: React.FC = () => {
   const { id } = useParams<Record<string, string | undefined>>();
   const page = Number(id);
   const initialSlice = page * 10 - 10;
-  const finalSlice = initialSlice + 9;
-  const data = favorite.slice(initialSlice, finalSlice);
 
-  if (data.length === 0 || data[0].id === dataInitialState[0].id)
-    history.push('/error');
+  const totalData = favorite || dataInitialState;
 
-  const totalHits = favorite.length;
+  const data = totalData.slice(initialSlice, initialSlice + 9);
+  console.log(data);
+
+  if (data.length === 0) history.push('/error');
+
+  const totalHits = totalData.length;
 
   const pages = pagesNumberContructor(page, totalHits);
 

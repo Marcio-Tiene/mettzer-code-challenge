@@ -1,24 +1,41 @@
 import { IData } from '../interfaces/IFormData';
 import { dataInitialState } from './utils';
 
-export const favorite: IData[] =
-  JSON.parse(localStorage.getItem('favorites')) || dataInitialState;
+export const favorite: IData[] = JSON.parse(localStorage.getItem('favorites'));
 
 export const postFavorite = (data: IData) => {
-  const initialState = favorite;
+  if (!!localStorage.getItem('favorites')) {
+    const initialState = JSON.parse(localStorage.getItem('favorites'));
 
-  initialState.push(data);
+    initialState.push(data);
 
-  localStorage.removeItem('favorites');
-  localStorage.setItem('favorites', JSON.stringify(initialState));
+    localStorage.removeItem('favorites');
+    localStorage.setItem('favorites', JSON.stringify(initialState));
+  } else {
+    const initialState = [];
+
+    initialState.push(data);
+
+    localStorage.removeItem('favorites');
+    localStorage.setItem('favorites', JSON.stringify(initialState));
+  }
 };
 
 export const deleteFavorite = (id: string) => {
-  const newData = favorite.filter((data) => data.id !== id);
-  localStorage.removeItem('favorites');
+  if (!!localStorage.getItem('favorites')) {
+    const newData = JSON.parse(localStorage.getItem('favorites')).filter(
+      (data: IData) => data.id !== id
+    );
+    localStorage.removeItem('favorites');
 
-  localStorage.setItem('favorites', JSON.stringify(newData));
+    localStorage.setItem('favorites', JSON.stringify(newData));
+  } else {
+    return;
+  }
 };
 
+const filterData: IData[] =
+  JSON.parse(localStorage.getItem('favorites')) || dataInitialState;
+
 export const isFavored = (id: string) =>
-  favorite.some((data) => data.id === id);
+  filterData.some((data) => data.id === id);
