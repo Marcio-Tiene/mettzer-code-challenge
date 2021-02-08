@@ -14,12 +14,14 @@ const Favorites: React.FC = () => {
   const page = Number(id);
   const initialSlice = page * 10 - 10;
 
-  const data = favorite.splice(initialSlice, 10) || dataInitialState;
+  const totalData = favorite || dataInitialState;
 
-  if (data[0].id === dataInitialState[0].id || data.length === 0)
-    history.push('/error');
+  const data = totalData.slice(initialSlice, initialSlice + 9);
+  console.log(data);
 
-  const totalHits = favorite.length;
+  if (data.length === 0) history.push('/error');
+
+  const totalHits = totalData.length;
 
   const pages = pagesNumberContructor(page, totalHits);
 

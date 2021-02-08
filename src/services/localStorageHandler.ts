@@ -1,4 +1,5 @@
 import { IData } from '../interfaces/IFormData';
+import { dataInitialState } from './utils';
 
 export const favorite: IData[] = JSON.parse(localStorage.getItem('favorites'));
 
@@ -33,5 +34,8 @@ export const deleteFavorite = (id: string) => {
   }
 };
 
+const filterData: IData[] =
+  JSON.parse(localStorage.getItem('favorites')) || dataInitialState;
+
 export const isFavored = (id: string) =>
-  favorite.some((data) => data.id === id);
+  filterData.some((data) => data.id === id);
