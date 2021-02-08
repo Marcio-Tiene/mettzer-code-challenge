@@ -36,7 +36,8 @@ const Home: React.FC = () => {
               >
                 CORE
               </CoreLink>{' '}
-              é maior coleção do mundo de artigos públicos de pesquisa.
+              é uma plataforma que oferece a maior coleção do mundo de artigos
+              públicos de pesquisa.
             </p>
 
             <p>Faça uma pesquisa e surpreenda-se!</p>

@@ -6,39 +6,11 @@ import { capitalize, capitalizeAllWords } from '../../services/utils';
 import { IData, IFormData } from '../../interfaces/IFormData';
 import { researchGet } from '../../services/coreApi';
 import PageLoadingSpiner from '../../components/PageLoadingSpinner';
-import Button from '../../components/Button';
-import { AiTwotoneStar } from 'react-icons/ai';
 import ArticleCard from '../../components/ArticleCard';
-
-const articlePerPage = 10;
-
-const pageCounter = (totlaHits: number) => {
-  const maxPages = Math.ceil(totlaHits / articlePerPage);
-
-  const totalpages = maxPages < 100 ? maxPages : 100;
-
-  return totalpages;
-};
-
-const initialPages = {
-  firstPage: 1,
-  previewsPage: 0,
-  previewPreviewPage: 0,
-  actualPage: 0,
-  nextPage: 0,
-  nextNextpage: 0,
-  lastPage: 0,
-};
-
-const pagesNumberContructor = (page: number, totalHits: number) => ({
-  firstPage: 1,
-  previewsPage: page - 2,
-  previewPreviewPage: page - 1,
-  actualPage: page,
-  nextPage: page + 1,
-  nextNextpage: page + 2,
-  lastPage: pageCounter(totalHits),
-});
+import PageTurners, {
+  initialPages,
+  pagesNumberContructor,
+} from '../../components/PageTurners';
 
 const CoreResultPage: React.FC = () => {
   const windowRef = window.location.href;
@@ -110,33 +82,12 @@ const CoreResultPage: React.FC = () => {
       >
         {data !== null ? (
           <>
+            <PageTurners pages={pages} />
             {data.map((data) => (
               <ArticleCard key={data.id} data={data} />
             ))}
 
-            <div style={{ display: 'flex', gap: '5px' }}>
-              {pages.previewPreviewPage > 0 && (
-                <Button label={`${pages.firstPage}`} />
-              )}
-              {pages.previewPreviewPage > 0 && (
-                <Button label={`${pages.previewPreviewPage}`} />
-              )}
-              {pages.previewsPage > 0 && (
-                <Button label={`${pages.previewsPage}`} />
-              )}
-
-              <Button label={`${pages.actualPage}`} />
-
-              {pages.nextPage < pages.lastPage && (
-                <Button label={`${pages.nextPage}`} />
-              )}
-              {pages.nextNextpage < pages.lastPage && (
-                <Button label={`${pages.nextNextpage}`} />
-              )}
-              {pages.nextNextpage < pages.lastPage && (
-                <Button label={`${pages.lastPage}`} />
-              )}
-            </div>
+            <PageTurners pages={pages} />
           </>
         ) : (
           <PageLoadingSpiner />
