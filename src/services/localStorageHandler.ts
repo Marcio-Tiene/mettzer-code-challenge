@@ -13,7 +13,12 @@ export const postFavorite = (data: IData) => {
     localStorage.removeItem('favorites');
     localStorage.setItem('favorites', JSON.stringify(initialState));
   } else {
-    localStorage.setItem('favorites', JSON.stringify([data]));
+    const initialState = [];
+
+    initialState.push(data);
+
+    localStorage.removeItem('favorites');
+    localStorage.setItem('favorites', JSON.stringify(initialState));
   }
 };
 
