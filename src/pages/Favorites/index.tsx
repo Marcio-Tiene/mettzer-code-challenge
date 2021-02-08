@@ -6,7 +6,6 @@ import BreadCrumb from '../../components/BreadCrumb';
 import { pagesNumberContructor } from '../../components/PageTurners';
 import SearchContent from '../../components/SearchContent';
 import { favorite } from '../../services/localStorageHandler';
-import { dataInitialState } from '../../services/utils';
 
 const Favorites: React.FC = () => {
   const history = useHistory();
@@ -16,8 +15,7 @@ const Favorites: React.FC = () => {
   const finalSlice = initialSlice + 9;
   const data = favorite.slice(initialSlice, finalSlice);
 
-  if (data.length === 0 || favorite[0].id === dataInitialState[0].id)
-    history.push('/error');
+  if (data.length === 0) history.push('/error');
 
   const totalHits = favorite.length;
 
