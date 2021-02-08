@@ -13,8 +13,6 @@ import {
 import SearchContent from '../../components/SearchContent';
 
 const CoreResultPage: React.FC = () => {
-  const favoritos: IData[] =
-    JSON.parse(localStorage.getItem('favoritos')) || ([] as IData[]);
   const windowRef = window.location.href;
 
   const history = useHistory();
@@ -24,7 +22,6 @@ const CoreResultPage: React.FC = () => {
 
   const [data, setData] = useState(null as IData[]);
   const [pages, setPages] = useState(initialPages);
-  const [isFavored, setIsFavored] = useState(false);
 
   const query = useQuery();
 

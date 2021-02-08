@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { IData } from '../../interfaces/IFormData';
 import {
+  deleteFavorite,
+  isFavored,
+  postFavorite,
+} from '../../services/localStorageHandler';
+import {
   ArticleTitle,
   ArticleTitleContainer,
   CardArticle,
@@ -15,20 +20,22 @@ import {
 
 interface IArticleCard {
   data: IData;
-  starOnClick?: (data: IData) => void;
-  isFavored?: boolean;
+  isfavoritesPage?: boolean;
 }
 
 const ArticleCard: React.FC<IArticleCard> = ({
   data,
-  isFavored = true,
-  starOnClick,
+  isfavoritesPage = false,
 }) => {
-  const [isStarChecked, setStarChecked] = useState(isFavored);
-  const starClickHandler = () => {
-    starOnClick && starOnClick(data);
+  const [isStarChecked, setStarChecked] = useState(isFavored(data.id));
 
+  const starClickHandler = () => {
     setStarChecked((prevState) => !prevState);
+    if (isfavoritesPage) {
+    }
+    if (!isfavoritesPage) {
+      isStarChecked ? deleteFavorite(data.id) : postFavorite(data);
+    }
   };
 
   return (

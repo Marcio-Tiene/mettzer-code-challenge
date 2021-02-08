@@ -15,8 +15,6 @@ const SearchContent: React.FC<ISearchContent> = ({
   pages,
   starOnClick,
 }) => {
-  const favorite: IData[] = JSON.parse(localStorage.getItem('favorites'));
-
   return (
     <section
       style={{
@@ -31,7 +29,7 @@ const SearchContent: React.FC<ISearchContent> = ({
         <>
           <PageTurners pages={pages} />
           {data.map((data) => (
-            <ArticleCard starOnClick={starOnClick} key={data.id} data={data} />
+            <ArticleCard key={data.id + data.type} data={data} />
           ))}
 
           <PageTurners pages={pages} />
