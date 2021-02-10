@@ -5,7 +5,6 @@ import { RiFileSearchLine } from 'react-icons/ri';
 import { AiTwotoneStar } from 'react-icons/ai';
 
 import FormOpenHook from '../../hooks/FormOpenHook';
-import { useHistory } from 'react-router';
 
 interface IToolNavBar {
   breadCrumbs?: React.ReactChild;
@@ -13,7 +12,6 @@ interface IToolNavBar {
 }
 
 const ToolNavBar: React.FC<IToolNavBar> = ({ children, className }) => {
-  const history = useHistory();
   const { setIsFormOpen } = FormOpenHook();
   return (
     <NavBar className={className}>
