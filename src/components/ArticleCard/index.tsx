@@ -68,7 +68,7 @@ const ArticleCard: React.FC<IArticleCard> = ({
           data.urls.map((url, index) => (
             <p key={index}>
               Link {index + 1}:{' '}
-              <ArticleLink to={url} target='_blank' rel='noopener noreferrer'>
+              <ArticleLink href={url} target='_blank' rel='noopener noreferrer'>
                 {url}
               </ArticleLink>
             </p>

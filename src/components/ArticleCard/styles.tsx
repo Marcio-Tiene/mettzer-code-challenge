@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { AiOutlineStar, AiTwotoneStar } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
 export const CardArticle = styled.article`
   position: relative;
   min-height: 2rem;
@@ -84,7 +83,7 @@ export const LinkContainer = styled.div`
   padding: 1rem 2rem;
 `;
 
-export const ArticleLink = styled(Link)`
+export const ArticleLink = styled.a`
   color: ${(p) => p.theme.colors.secondary.main};
   font-weight: 600;
 
