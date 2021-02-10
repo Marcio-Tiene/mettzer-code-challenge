@@ -24,13 +24,14 @@ const ToolNavBar: React.FC<IToolNavBar> = ({ children, className }) => {
         iconSize={2}
         onClick={() => setIsFormOpen(true)}
       />
-      <Button
-        className='secondary-action-filled'
-        label='Favoritos'
-        Icon={AiTwotoneStar}
-        iconSize={2}
-        onClick={() => history.push('/favorites/1')}
-      />
+      <a href='/favorites/1'>
+        <Button
+          className='secondary-action-filled'
+          label='Favoritos'
+          Icon={AiTwotoneStar}
+          iconSize={2}
+        />
+      </a>
     </NavBar>
   );
 };
