@@ -1,5 +1,9 @@
 import { useContext } from 'react';
-import { FavoriteContext, SetFavorite } from '../contexts/FavoriteContext';
+import {
+  FavoriteContext,
+  SetFavorite,
+  SetPage,
+} from '../contexts/FavoriteContext';
 
 import { IData } from '../interfaces/IFormData';
 
@@ -9,8 +13,11 @@ const FavoriteHook = () => {
   const setFavorite = useContext(SetFavorite) as React.Dispatch<
     React.SetStateAction<IData[]>
   >;
+  const setPage = useContext(SetPage) as React.Dispatch<
+    React.SetStateAction<number>
+  >;
 
-  return { favorite, pageFavorites, pages, setFavorite };
+  return { favorite, pageFavorites, pages, setFavorite, setPage };
 };
 
 export default FavoriteHook;
