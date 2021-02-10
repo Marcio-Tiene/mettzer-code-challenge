@@ -32,6 +32,7 @@ const FavoriteContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const initialSlice = page * 10 - 10;
     const totalData: IData[] = !!favorite ? favorite : dataInitialState;
+
     const data = totalData.slice(initialSlice, initialSlice + 10);
     console.log(data);
 
@@ -42,7 +43,10 @@ const FavoriteContextProvider: React.FC = ({ children }) => {
     const totalHits = favorite.length;
 
     const favoritesPages = pagesNumberContructor(page, totalHits);
-    setPages(favoritesPages);
+    console.log(favoritesPages);
+    setPages((prevState) => {
+      return { ...prevState, ...favoritesPages };
+    });
   }, [favorite, page]);
 
   return (
