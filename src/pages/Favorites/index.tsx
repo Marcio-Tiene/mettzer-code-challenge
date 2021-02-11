@@ -1,33 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PageDefault from '../../components/PageDefault';
-import { useHistory, useParams } from 'react-router-dom';
 import BreadCrumb from '../../components/BreadCrumb';
 
-import { pagesNumberContructor } from '../../components/PageTurners';
 import SearchContent from '../../components/SearchContent';
-import { favorite } from '../../services/localStorageHandler';
-import { dataInitialState } from '../../services/utils';
+import FavoriteHook from '../../hooks/FavoriteHook';
+import { useParams } from 'react-router';
 
 const Favorites: React.FC = () => {
-  const history = useHistory();
+  const [actualPage, setActualPage] = useState(1);
+  const { pages, pageFavorites, setPage } = FavoriteHook();
+
   const { id } = useParams<Record<string, string | undefined>>();
-  const page = Number(id);
-  const initialSlice = page * 10 - 10;
 
-  const totalData = favorite || dataInitialState;
+  useEffect(() => {
+    setActualPage(Number(id));
 
-  const data = totalData.slice(initialSlice, initialSlice + 9);
-  console.log(data);
+    setPage(Number(id));
 
-  if (data.length === 0) history.push('/error');
-
-  const totalHits = totalData.length;
-
-  const pages = pagesNumberContructor(page, totalHits);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [actualPage, id, pages]);
 
   return (
-    <PageDefault breadCrumbs={<BreadCrumb tool='Favoritos' page={page} />}>
-      <SearchContent isFavoritePage={true} data={data} pages={pages} />
+    <PageDefault
+      breadCrumbs={<BreadCrumb tool='Favoritos' page={pages.actualPage} />}
+    >
+      <SearchContent isFavoritePage={true} data={pageFavorites} pages={pages} />
     </PageDefault>
   );
 };

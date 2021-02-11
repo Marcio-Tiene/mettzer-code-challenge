@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import FavoriteHook from '../../hooks/FavoriteHook';
 import { IData } from '../../interfaces/IFormData';
 import {
   deleteFavorite,
   isFavored,
   postFavorite,
 } from '../../services/localStorageHandler';
+import { dataInitialState } from '../../services/utils';
 import {
   ArticleTitle,
   ArticleTitleContainer,
@@ -27,16 +29,30 @@ const ArticleCard: React.FC<IArticleCard> = ({
   data,
   isfavoritesPage = false,
 }) => {
+  const { setFavorite } = FavoriteHook();
   const [isStarChecked, setStarChecked] = useState(isFavored(data.id));
 
   const starClickHandler = () => {
     setStarChecked((prevState) => !prevState);
     if (isfavoritesPage) {
-      isStarChecked ? deleteFavorite(data.id) : postFavorite(data);
-      window.location.reload();
+      deleteFavorite(data.id);
+      const favoriteLocalStorage: IData[] = JSON.parse(
+        localStorage.getItem('favorites')
+      );
+      const favoriteData = !!favoriteLocalStorage
+        ? favoriteLocalStorage
+        : dataInitialState;
+      setFavorite(favoriteData);
     }
     if (!isfavoritesPage) {
       isStarChecked ? deleteFavorite(data.id) : postFavorite(data);
+      const favoriteLocalStorage: IData[] = JSON.parse(
+        localStorage.getItem('favorites')
+      );
+      const favoriteData = !!favoriteLocalStorage
+        ? favoriteLocalStorage
+        : dataInitialState;
+      setFavorite(favoriteData);
     }
   };
 

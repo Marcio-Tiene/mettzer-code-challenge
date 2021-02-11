@@ -29,7 +29,7 @@ const SearchContent: React.FC<ISearchContent> = ({
     >
       {data !== null ? (
         <>
-          <PageTurners pages={pages} />
+          <PageTurners isFavoritePage={isFavoritePage} pages={pages} />
           {data.map((data) => (
             <ArticleCard
               isfavoritesPage={isFavoritePage}
@@ -38,7 +38,7 @@ const SearchContent: React.FC<ISearchContent> = ({
             />
           ))}
 
-          <PageTurners pages={pages} />
+          <PageTurners isFavoritePage={isFavoritePage} pages={pages} />
         </>
       ) : (
         <PageLoadingSpiner />
