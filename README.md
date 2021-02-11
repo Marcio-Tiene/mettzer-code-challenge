@@ -71,4 +71,4 @@ Você pode acessar rotas usando query params
 
 Como nesse exemplo [https://mettzer-code-challenge.vercel.app/core-search?authors=marcio&title=beer&page=1](https://mettzer-code-challenge.vercel.app/core-search?authors=marcio&title=beer&page=1)
 
-###Aproveite.
+### Aproveite.

@@ -17,6 +17,7 @@ export interface IPageTurner {
 }
 interface IPages {
   pages: IPageTurner;
+  isFavoritePage: boolean;
 }
 
 const pageCounter = (totlaHits: number, articlesPerPage: number = 10) => {
@@ -44,13 +45,20 @@ export const pagesNumberContructor = (page: number, totalHits: number) => ({
   lastPage: pageCounter(totalHits),
 });
 
-const PageTurners: React.FC<IPages> = ({ pages }) => {
+const PageTurners: React.FC<IPages> = ({ pages, isFavoritePage }) => {
   const history = useHistory();
   const href = (useLocation().pathname + useLocation().search).split('page=');
   const OnClick = (page: number) => {
-    const targetHref = `${href[0]}page=${page}`;
+    if (isFavoritePage) {
+      history.push(`/favorite/${page}`);
+      console.log(`/${page}`);
+    }
 
-    history.push(targetHref);
+    if (!isFavoritePage) {
+      const targetHref = `${href[0]}page=${page}`;
+
+      history.push(targetHref);
+    }
   };
   return (
     <PageTurnerContent>
@@ -68,7 +76,7 @@ const PageTurners: React.FC<IPages> = ({ pages }) => {
           </>
         )}
 
-        {pages.previewsPage > 1 && (
+        {pages.previewsPage >= 1 && (
           <Pagebutton onClickCapture={() => OnClick(pages.previewsPage)}>
             {pages.previewsPage}
           </Pagebutton>
@@ -76,7 +84,7 @@ const PageTurners: React.FC<IPages> = ({ pages }) => {
 
         <EtceteraSpan className='actual-page'>{pages.actualPage}</EtceteraSpan>
 
-        {pages.nextPage < pages.lastPage && (
+        {pages.nextPage <= pages.lastPage && (
           <Pagebutton onClickCapture={() => OnClick(pages.nextPage)}>
             {pages.nextPage}
           </Pagebutton>

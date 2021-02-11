@@ -18,7 +18,7 @@ const Favorites: React.FC = () => {
     setPage(Number(id));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [actualPage, id]);
+  }, [actualPage, id, pages]);
 
   return (
     <PageDefault
